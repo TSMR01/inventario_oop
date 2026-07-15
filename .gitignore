@@ -1,6 +1,27 @@
-.env
-*.db
+# Bytecode de Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
 venv/
+env/
+.venv/
+
+# Archivos de configuración del IDE
 .vscode/
+.idea/
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Variables de entorno
+.env
+
+# Base de datos SQLite
+*.db
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
