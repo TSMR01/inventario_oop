@@ -11,14 +11,19 @@ from src.modelo import Producto
 from src.servicio import InventarioService
 
 
-def ejecutar_demo():
+def ejecutar_demo() -> None:
     crear_tabla()
 
     dao = ProductoDAO()
     servicio = InventarioService(dao)
 
     try:
-        producto = Producto("Mouse", 250, 3)
+        producto = Producto(
+            nombre="Mouse",
+            precio=250,
+            stock=3
+        )
+
         dao.guardar(producto)
 
         print("Producto guardado:")

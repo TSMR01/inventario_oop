@@ -10,7 +10,6 @@ from src.servicio import InventarioService
 
 
 class TestInventarioService(unittest.TestCase):
-
     def setUp(self):
         self.dao_mock = Mock()
         self.servicio = InventarioService(self.dao_mock)
