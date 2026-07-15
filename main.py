@@ -1,42 +1,50 @@
-class Persona:
-    def __init__(self, nombre, edad):
-        self.nombre = nombre
-        self.edad = edad
+import sqlite3
 
-    def mostrar_datos(self):
-        print(f"Nombre: {self.nombre}")
-        print(f"Edad: {self.edad}")
+from src.dao import ProductoDAO
+from src.db import crear_tabla
+from src.excepciones import (
+    CantidadInvalidaError,
+    ProductoNoEncontradoError,
+    StockInsuficienteError
+)
+from src.modelo import Producto
+from src.servicio import InventarioService
 
 
-def main():
-    persona = Persona("Héctor", 20)
-    persona.mostrar_datos()
+def ejecutar_demo():
+    crear_tabla()
+
+    dao = ProductoDAO()
+    servicio = InventarioService(dao)
+
+    try:
+        producto = Producto("Mouse", 250, 3)
+        dao.guardar(producto)
+
+        print("Producto guardado:")
+        print(producto)
+
+        print("\nIntentando vender 10 unidades...")
+        servicio.vender(producto.id, 10)
+
+    except StockInsuficienteError as error:
+        print(f"Excepción de negocio: {error}")
+
+    except ProductoNoEncontradoError as error:
+        print(f"Producto no encontrado: {error}")
+
+    except CantidadInvalidaError as error:
+        print(f"Cantidad inválida: {error}")
+
+    except ValueError as error:
+        print(f"Valor inválido: {error}")
+
+    except sqlite3.Error as error:
+        print(f"Error de base de datos: {error}")
+
+    except Exception as error:
+        print(f"Error inesperado: {error}")
 
 
 if __name__ == "__main__":
-    main()
-
-class Persona:
-    def __init__(self, nombre, edad, correo):
-        self.nombre = nombre
-        self.edad = edad
-        self.correo = correo
-
-    def mostrar_datos(self):
-        print(f"Nombre: {self.nombre}")
-        print(f"Edad: {self.edad}")
-        print(f"Correo: {self.correo}")
-
-
-def main():
-    persona = Persona(
-        "Héctor",
-        20,
-        "hector@correo.com"
-    )
-
-    persona.mostrar_datos()
-
-
-if __name__ == "__main__":
-    main()
+    ejecutar_demo()
