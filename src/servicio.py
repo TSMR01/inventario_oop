@@ -7,12 +7,10 @@ from src.excepciones import (
 
 
 class InventarioService:
-
     def __init__(self, producto_dao: ProductoDAO):
         self.producto_dao = producto_dao
 
     def vender(self, producto_id: int, cantidad: int):
-
         if cantidad <= 0:
             raise CantidadInvalidaError(
                 "La cantidad de venta debe ser mayor a 0"
@@ -27,7 +25,8 @@ class InventarioService:
 
         if cantidad > producto.stock:
             raise StockInsuficienteError(
-                f"Stock insuficiente. Disponible: {producto.stock}, solicitado: {cantidad}"
+                f"Stock insuficiente. Disponible: {producto.stock}, "
+                f"solicitado: {cantidad}"
             )
 
         producto.stock -= cantidad
