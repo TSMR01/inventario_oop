@@ -12,33 +12,33 @@ class Producto:
         self.stock = stock
 
     @property
-    def id(self):
+    def id(self) -> int | None:
         return self._id
 
     @id.setter
-    def id(self, valor):
+    def id(self, valor: int | None) -> None:
         if valor is not None and valor <= 0:
             raise ValueError("El id debe ser mayor a 0")
 
         self._id = valor
 
     @property
-    def nombre(self):
+    def nombre(self) -> str:
         return self._nombre
 
     @nombre.setter
-    def nombre(self, valor):
+    def nombre(self, valor: str) -> None:
         if not isinstance(valor, str) or not valor.strip():
             raise ValueError("El nombre no puede estar vacío")
 
         self._nombre = valor.strip()
 
     @property
-    def precio(self):
+    def precio(self) -> float:
         return self._precio
 
     @precio.setter
-    def precio(self, valor):
+    def precio(self, valor: float) -> None:
         if not isinstance(valor, (int, float)):
             raise TypeError("El precio debe ser numérico")
 
@@ -48,11 +48,11 @@ class Producto:
         self._precio = float(valor)
 
     @property
-    def stock(self):
+    def stock(self) -> int:
         return self._stock
 
     @stock.setter
-    def stock(self, valor):
+    def stock(self, valor: int) -> None:
         if not isinstance(valor, int):
             raise TypeError("El stock debe ser un número entero")
 
@@ -61,7 +61,7 @@ class Producto:
 
         self._stock = valor
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f"Producto(id={self.id}, nombre='{self.nombre}', "
             f"precio=${self.precio:.2f}, stock={self.stock})"
